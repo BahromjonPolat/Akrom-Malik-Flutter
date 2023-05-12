@@ -1,7 +1,11 @@
 import 'package:akrom_malik_flutter/data/warrior.dart';
 import 'package:akrom_malik_flutter/models/book_model.dart';
 import 'package:akrom_malik_flutter/screens/reading/read_book.dart';
+import 'package:akrom_malik_flutter/screens/reading/reading_book_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../reading/bloc/reading_bloc.dart';
 
 _getBook(BuildContext context) => GestureDetector(
       child: Container(
@@ -37,9 +41,18 @@ _getBook(BuildContext context) => GestureDetector(
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return ReadingBookPage();
-        }));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) {
+            return BlocProvider(
+              create: (context) => ReadingBloc()
+                ..add(
+                  ReadingEvent.started('books/warrior.html'),
+                ),
+              child: const ReadingBookScreen(),
+            );
+          }),
+        );
       },
     );
 
