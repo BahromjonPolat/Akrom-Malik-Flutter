@@ -8,7 +8,7 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
-  Size _size;
+  late Size _size;
   int _currentIndex = 0;
 
   @override
