@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:akrom_malik_flutter/data/warrior.dart';
 import 'package:akrom_malik_flutter/models/book_model.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,33 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
     return SafeArea(
       child: Scaffold(
         body: _reedBook(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            StringBuffer buffer = StringBuffer();
+            for (var i = 0; i < bookWarrior.length; i++) {
+              final book = bookWarrior[i];
+              buffer.write(_bookToFile(book));
+            }
+            final body = """
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>Jangchi</title>
+</head>
+<body>
+    
+    ${buffer.toString()}
+</body>
+</html>
+
+""";
+
+            final file = File('./books/warrior.html');
+            await file.writeAsString(body);
+          },
+        ),
       ),
     );
   }
@@ -29,10 +58,15 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(18.0),
-                        child: Text(
-                          book.page,
-                          style: TextStyle(
-                              fontSize: 24.0, fontWeight: FontWeight.bold),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            book.page,
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                       Padding(
@@ -48,4 +82,19 @@ class _ReadingBookPageState extends State<ReadingBookPage> {
               );
             }),
       );
+
+  String _bookToFile(Book book) {
+    List<String> elements = book.body.split('\n\n');
+    StringBuffer buffer = StringBuffer();
+    for (var e in elements) {
+      buffer.write('<p>$e</p>\n');
+    }
+    return """
+
+    <section style="text-align: center; font-size: 18pt; font-weight: 600;">${book.page}</section>
+
+    ${buffer.toString()}
+
+""";
+  }
 }
