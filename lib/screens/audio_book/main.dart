@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AudioBooksPage extends StatefulWidget {
+  const AudioBooksPage({super.key});
 
   @override
-  _AudioBooksPageState createState() => _AudioBooksPageState();
+  State<AudioBooksPage> createState() => _AudioBooksPageState();
 }
 
 class _AudioBooksPageState extends State<AudioBooksPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-    );
+    return const Scaffold();
   }
 }
