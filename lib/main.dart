@@ -1,6 +1,8 @@
 import 'package:akrom_malik_flutter/core/theme/app_theme.dart';
+import 'package:akrom_malik_flutter/routing/app_navigation.dart';
+import 'package:akrom_malik_flutter/routing/app_route_names.dart';
+import 'package:akrom_malik_flutter/routing/route_generator.dart';
 import 'package:akrom_malik_flutter/screens/home/home_screen.dart';
-import 'package:akrom_malik_flutter/screens/initial/initial_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,10 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: getApplicationTheme(),
-      home: BlocProvider(
-        create: (context) => BottomNavBarBloc(),
-        child: const HomeScreen(),
-      ),
+      navigatorKey: AppNavigator.navigatorKey,
+      initialRoute: RouteNames.home,
+      onGenerateRoute: RouteGenerator.onGenerateRoute,
     );
   }
 }

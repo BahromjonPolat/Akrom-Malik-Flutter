@@ -47,11 +47,12 @@ class _ReadingBookScreenState extends State<ReadingBookScreen> {
             itemBuilder: (context, index) {
               final content = _pages[index];
               return Card(
-                margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 24.0),
                 child: Html(
                   data: content,
                   style: {
-                    'body': Style(fontSize: FontSize(20)),
+                    'body': Style(fontSize: const FontSize(20)),
                     'section': Style(
                       alignment: Alignment.center,
                       fontSize: FontSize(24.0),

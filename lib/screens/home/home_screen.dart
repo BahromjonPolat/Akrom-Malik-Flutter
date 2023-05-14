@@ -11,6 +11,7 @@
 
 */
 
+import 'package:akrom_malik_flutter/screens/books/books_page.dart';
 import 'package:akrom_malik_flutter/screens/home/bloc/bottom_nav_bar_bloc.dart';
 import 'package:akrom_malik_flutter/screens/home/components/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _pages.addAll(
       const [
         SizedBox(),
-        SizedBox(),
+        BooksPage(),
         SizedBox(),
         SizedBox(),
       ],
