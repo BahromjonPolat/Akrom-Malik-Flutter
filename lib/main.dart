@@ -1,14 +1,20 @@
+import 'package:akrom_malik_flutter/core/constants/constants.dart';
 import 'package:akrom_malik_flutter/core/theme/app_theme.dart';
 import 'package:akrom_malik_flutter/routing/app_navigation.dart';
 import 'package:akrom_malik_flutter/routing/app_route_names.dart';
 import 'package:akrom_malik_flutter/routing/route_generator.dart';
-import 'package:akrom_malik_flutter/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
-import 'screens/home/bloc/bottom_nav_bar_bloc.dart';
-
-void main() => runApp(MyApp());
+void main() async {
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+    notificationColor: AppColors.green,
+  );
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

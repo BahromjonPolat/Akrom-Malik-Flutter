@@ -36,7 +36,7 @@ class _ReadingBookScreenState extends State<ReadingBookScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: BlocConsumer<ReadingBloc, ReadingState>(
         listener: (context, state) {
           loadBook(state.book);
@@ -47,19 +47,28 @@ class _ReadingBookScreenState extends State<ReadingBookScreen> {
             itemBuilder: (context, index) {
               final content = _pages[index];
               return Card(
+                color: Colors.transparent,
+                elevation: 0.0,
                 margin: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 24.0),
-                child: Html(
-                  data: content,
-                  style: {
-                    'body': Style(fontSize: const FontSize(20)),
-                    'section': Style(
-                      alignment: Alignment.center,
-                      fontSize: FontSize(24.0),
-                      textAlign: TextAlign.center,
-                      fontWeight: FontWeight.w600,
-                    )
-                  },
+                  horizontal: 16.0,
+                  vertical: 24.0,
+                ),
+                child: SingleChildScrollView(
+                  child: Html(
+                    data: content,
+                    style: {
+                      'body': Style(
+                        fontSize: const FontSize(20),
+                        textAlign: TextAlign.justify,
+                      ),
+                      'section': Style(
+                        alignment: Alignment.center,
+                        fontSize: const FontSize(24.0),
+                        textAlign: TextAlign.center,
+                        fontWeight: FontWeight.w600,
+                      )
+                    },
+                  ),
                 ),
               );
             },
@@ -69,7 +78,7 @@ class _ReadingBookScreenState extends State<ReadingBookScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           BlocProvider.of<ReadingBloc>(context).add(
-            ReadingEvent.started('books/warrior.html'),
+            const ReadingEvent.started('books/warrior.html'),
           );
         },
       ),
@@ -86,7 +95,7 @@ class _ReadingBookScreenState extends State<ReadingBookScreen> {
       text += '<$tag>${element.text}</$tag>\n';
     }
     setState(() {
-      _pages = _divideTextIntoPages(text, 20);
+      _pages = _divideTextIntoPages(text, 24);
     });
   }
 
@@ -94,7 +103,7 @@ class _ReadingBookScreenState extends State<ReadingBookScreen> {
     // Calculate the available width and height
     final queryData = MediaQuery.of(context);
     final availableWidth = queryData.size.width - 64.0;
-    final availableHeight = queryData.size.height;
+    final availableHeight = queryData.size.height - 64.0;
     print('$availableWidth X $availableHeight');
 
     final textStyle =
